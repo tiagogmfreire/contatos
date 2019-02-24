@@ -28,10 +28,8 @@ class PessoaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, PessoaBO $PessoaBO, Pessoa $pessoa)
     { 
-        $pessoa = new Pessoa();
-
         $pessoa->nome = $request->input('nome');
         $pessoa->cpf = $request->input('cpf');
         $pessoa->email = $request->input('email');
@@ -39,8 +37,6 @@ class PessoaController extends Controller
         $pessoa->telefone = $request->input('telefone');
 
         $this->validar($pessoa);
-
-        $PessoaBO = new PessoaBO(new PessoaDAO(new PessoaModel()));
 
         $resultado = $PessoaBO->criar($pessoa);
 
