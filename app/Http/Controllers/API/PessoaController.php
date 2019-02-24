@@ -106,16 +106,23 @@ class PessoaController extends Controller
 
     public function validar(Pessoa $pessoa)
     {
+        $msg = '';
+
         if (empty($pessoa->nome)) {
-            throw new \Exception('O Parmâmetro "nome" não pode ser vazio', 400);
+           $msg .= 'O parâmetro "nome" não pode ser vazio; ';
         }
 
         if (empty($pessoa->cpf)) {
-            throw new \Exception('O Parmâmetro "cpf" não pode ser vazio', 400);
+            $msg .= 'O Parmâmetro "cpf" não pode ser vazio; ';            
         }
 
         if (empty($pessoa->email)) {
-            throw new \Exception('O Parmâmetro "email" não pode ser vazio', 400);
+            $msg .= 'O Parmâmetro "email" não pode ser vazio; ';            
+        }
+
+        //se a mensagem de validação não for vazia, dispara uma exceção
+        if (!empty($msg)) {
+            throw new \Exception($msg, 400);
         }
     }
 }
