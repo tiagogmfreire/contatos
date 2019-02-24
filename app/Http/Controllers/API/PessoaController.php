@@ -28,7 +28,7 @@ class PessoaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, PessoaBO $PessoaBO, Pessoa $pessoa)
+    public function store(Request $request, PessoaBO $pessoaBO, Pessoa $pessoa)
     { 
         $pessoa->nome = $request->input('nome');
         $pessoa->cpf = $this->filtrarNumero($request->input('cpf'));
@@ -37,7 +37,7 @@ class PessoaController extends Controller
 
         $this->validar($pessoa);
 
-        $resultado = $PessoaBO->criar($pessoa);
+        $resultado = $pessoaBO->criar($pessoa);
 
         return $this->retorno(
             $resultado,
