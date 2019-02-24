@@ -15,8 +15,8 @@ class PessoaDAO
     }
 
     public function listar()
-    { 
-
+    {         
+        return PessoaModel::all();
     }
 
     public function detalhar($id)

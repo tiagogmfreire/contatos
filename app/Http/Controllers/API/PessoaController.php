@@ -17,9 +17,11 @@ class PessoaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(PessoaBO $pessoaBO)
     {
-        
+        $pessoas = $pessoaBO->listar();
+
+        return response()->json($pessoas);
     }
 
     /**
