@@ -115,6 +115,11 @@ class PessoaController extends Controller
             $msg .= 'O Parmâmetro "email" não pode ser vazio; ';            
         }
 
+        //usando extensão multibyte para contar corretamente o Nº de caracteres de uma string UTF-8
+        if (mb_strlen($pessoa->cpf) != 11) {
+            $msg .= 'O Parmâmetro "cpf" deve ter 11 caracteres (pontos e traços são ignorados); ';            
+        }
+
         //se a mensagem de validação não for vazia, dispara uma exceção
         if (!empty($msg)) {
             throw new \Exception($msg, 400);
