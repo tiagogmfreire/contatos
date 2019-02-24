@@ -21,7 +21,7 @@ class PessoaDAO
 
     public function detalhar($id)
     {
-
+        return PessoaModel::find($id);
     }
 
     public function criar(Pessoa $pessoa)
