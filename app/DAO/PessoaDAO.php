@@ -3,6 +3,7 @@
 namespace App\DAO;
 
 use App\Model\PessoaModel;
+use App\Entidades\Pessoa;
 
 class PessoaDAO
 {
@@ -16,9 +17,16 @@ class PessoaDAO
 
     }
 
-    public function criar(PessoaModel $pessoaModel)
+    public function criar(Pessoa $pessoa)
     { 
+        $pessoaModel = new PessoaModel();
 
+        $pessoaModel->nome = $pessoa->nome;
+        $pessoaModel->cpf = $pessoa->cpf;
+        $pessoaModel->email = $pessoa->email;
+        $pessoaModel->telefone = $pessoa->telefone;
+
+        return $pessoaModel->save();
     }
 
     public function atualizar(PessoaModel $pessoaModel)

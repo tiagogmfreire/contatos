@@ -5,6 +5,10 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\PessoaModel;
+use App\BO\PessoaBO;
+use App\DAO\PessoaDAO;
+use App\Entidades\Pessoa;
+use Nexmo\Client\Response\Response;
 
 class PessoaController extends Controller
 {
@@ -26,7 +30,7 @@ class PessoaController extends Controller
      */
     public function store(Request $request)
     {
-        $pessoa = new \stdClass();
+        $pessoa = new Pessoa();
 
         $pessoa->nome = $request->input('nome');
         $pessoa->cpf = $request->input('cpf');
@@ -34,7 +38,9 @@ class PessoaController extends Controller
         $pessoa->email = $request->input('email');
         $pessoa->telefone = $request->input('telefone');
 
-        return response()->json($pessoa);      
+        $PessoaBO = new PessoaBO(new PessoaDAO());
+
+        $PessoaBO->criar($pessoa);
     }
 
     /**

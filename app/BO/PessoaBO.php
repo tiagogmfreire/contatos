@@ -4,6 +4,7 @@ namespace App\BO;
 
 use App\DAO\PessoaDAO;
 use App\Model\PessoaModel;
+use App\Entidades\Pessoa;
 
 class PessoaBO
 {
@@ -24,9 +25,9 @@ class PessoaBO
         return $this->dao->detalhar($id);
     }
 
-    public function criar(PessoaModel $pessoaModel)
+    public function criar(Pessoa $pessoa)
     { 
-        return $this->dao->criar($pessoaModel);
+        return $this->dao->criar($pessoa);
     }
 
     public function atualizar(PessoaModel $pessoaModel)

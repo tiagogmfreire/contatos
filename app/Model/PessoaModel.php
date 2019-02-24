@@ -12,7 +12,7 @@ class PessoaModel extends Model
 {
     use SoftDeletes;
 
-    protected $table = 'uf';    
+    protected $table = 'pessoa';    
     protected $fillable = array('*');
     protected $guarded = ['id'];
 }
