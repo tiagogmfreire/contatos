@@ -14,6 +14,6 @@ use Illuminate\Http\Request;
 */
 
 Route::apiResources([
-    'pessoa' => 'PessoaController',
-    'endereco' => 'EnderecoController'
+    'pessoa' => 'API\PessoaController',
+    'endereco' => 'API\EnderecoController'
 ]);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\PessoaModel;
 
 class PessoaController extends Controller
 {
@@ -14,7 +15,7 @@ class PessoaController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -25,7 +26,15 @@ class PessoaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pessoa = new \stdClass();
+
+        $pessoa->nome = $request->input('nome');
+        $pessoa->cpf = $request->input('cpf');
+        $pessoa->email = $request->input('email');
+        $pessoa->email = $request->input('email');
+        $pessoa->telefone = $request->input('telefone');
+
+        return response()->json($pessoa);      
     }
 
     /**
