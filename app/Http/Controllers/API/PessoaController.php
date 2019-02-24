@@ -42,21 +42,11 @@ class PessoaController extends Controller
 
         $resultado = $PessoaBO->criar($pessoa);
 
-        $status = '';
-        $msg = '';
-
-        if ($resultado) {
-            $status = 200;
-            $msg = 'Pessoa cadastrada com sucesso!';
-        } else {
-            $msg = 'Erro ao cadastrar pessoa!';
-            $status = 500;
-        }
-
-        return response()->json(
-            ['msg' => $msg], 
-            $status
-        ); 
+        return $this->retorno(
+            $resultado,
+            'Pessoa cadastrada com sucesso!',
+            'Erro ao cadastrar pessoa!'
+        );
     }
 
     /**
@@ -91,5 +81,24 @@ class PessoaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function retorno($resultado, $sucesso = 'Operação realizada com sucesso!', $erro = 'Erro ao realizar operação')
+    {
+        $status = '';
+        $msg = '';
+
+        if ($resultado) {
+            $status = 200;
+            $msg = $sucesso;
+        } else {
+            $msg = $erro;
+            $status = 500;
+        }
+
+        return response()->json(
+            ['msg' => $msg], 
+            $status
+        ); 
     }
 }
