@@ -29,8 +29,10 @@ class PessoaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    { 
         $pessoa = new Pessoa();
+
+        throw new \Exception("Boo!", 400);
 
         $pessoa->nome = $request->input('nome');
         $pessoa->cpf = $request->input('cpf');
