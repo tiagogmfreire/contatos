@@ -31,10 +31,9 @@ class PessoaController extends Controller
     public function store(Request $request, PessoaBO $PessoaBO, Pessoa $pessoa)
     { 
         $pessoa->nome = $request->input('nome');
-        $pessoa->cpf = $request->input('cpf');
-        $pessoa->email = $request->input('email');
-        $pessoa->email = $request->input('email');
-        $pessoa->telefone = $request->input('telefone');
+        $pessoa->cpf = $this->filtrarNumero($request->input('cpf'));
+        $pessoa->email = $request->input('email');        
+        $pessoa->telefone = $this->filtrarNumero($request->input('telefone'));
 
         $this->validar($pessoa);
 
@@ -120,5 +119,10 @@ class PessoaController extends Controller
         if (!empty($msg)) {
             throw new \Exception($msg, 400);
         }
+    }
+
+    public function filtrarNumero($numero)
+    {
+        return preg_replace('/\D/', '', $numero);
     }
 }
