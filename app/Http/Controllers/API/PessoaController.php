@@ -40,7 +40,23 @@ class PessoaController extends Controller
 
         $PessoaBO = new PessoaBO(new PessoaDAO());
 
-        $PessoaBO->criar($pessoa);
+        $resultado = $PessoaBO->criar($pessoa);
+
+        $status = '';
+        $msg = '';
+
+        if ($resultado) {
+            $status = 200;
+            $msg = 'Pessoa cadastrada com sucesso!';
+        } else {
+            $msg = 'Erro ao cadastrar pessoa!';
+            $status = 500;
+        }
+
+        return response()->json(
+            ['msg' => $msg], 
+            $status
+        ); 
     }
 
     /**
