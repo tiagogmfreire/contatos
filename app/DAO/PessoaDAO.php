@@ -2,9 +2,32 @@
 
 namespace App\DAO;
 
-namespace App\Model\PessoaModel;
+use App\Model\PessoaModel;
 
 class PessoaDAO
 {
+    public function listar()
+    { 
 
+    }
+
+    public function detalhar($id)
+    {
+
+    }
+
+    public function criar(PessoaModel $pessoaModel)
+    { 
+
+    }
+
+    public function atualizar(PessoaModel $pessoaModel)
+    {
+
+    }
+    
+    public function excluir($id)
+    {
+
+    }
 }
