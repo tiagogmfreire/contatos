@@ -32,13 +32,13 @@ class PessoaController extends Controller
     { 
         $pessoa = new Pessoa();
 
-        throw new \Exception("Boo!", 400);
-
         $pessoa->nome = $request->input('nome');
         $pessoa->cpf = $request->input('cpf');
         $pessoa->email = $request->input('email');
         $pessoa->email = $request->input('email');
         $pessoa->telefone = $request->input('telefone');
+
+        $this->validar($pessoa);
 
         $PessoaBO = new PessoaBO(new PessoaDAO());
 
@@ -102,5 +102,20 @@ class PessoaController extends Controller
             ['msg' => $msg], 
             $status
         ); 
+    }
+
+    public function validar(Pessoa $pessoa)
+    {
+        if (empty($pessoa->nome)) {
+            throw new \Exception('O Parmâmetro "nome" não pode ser vazio', 400);
+        }
+
+        if (empty($pessoa->cpf)) {
+            throw new \Exception('O Parmâmetro "cpf" não pode ser vazio', 400);
+        }
+
+        if (empty($pessoa->email)) {
+            throw new \Exception('O Parmâmetro "email" não pode ser vazio', 400);
+        }
     }
 }
