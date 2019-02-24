@@ -7,6 +7,13 @@ use App\Entidades\Pessoa;
 
 class PessoaDAO
 {
+    protected $model;
+
+    public function __construct(PessoaModel $pessoaModel)
+    {
+        $this->model = $pessoaModel;
+    }
+
     public function listar()
     { 
 
@@ -19,14 +26,12 @@ class PessoaDAO
 
     public function criar(Pessoa $pessoa)
     { 
-        $pessoaModel = new PessoaModel();
+        $this->model->nome = $pessoa->nome;
+        $this->model->cpf = $pessoa->cpf;
+        $this->model->email = $pessoa->email;
+        $this->model->telefone = $pessoa->telefone;
 
-        $pessoaModel->nome = $pessoa->nome;
-        $pessoaModel->cpf = $pessoa->cpf;
-        $pessoaModel->email = $pessoa->email;
-        $pessoaModel->telefone = $pessoa->telefone;
-
-        return $pessoaModel->save();
+        return $this->model->save();
     }
 
     public function atualizar(PessoaModel $pessoaModel)

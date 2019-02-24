@@ -40,7 +40,7 @@ class PessoaController extends Controller
 
         $this->validar($pessoa);
 
-        $PessoaBO = new PessoaBO(new PessoaDAO());
+        $PessoaBO = new PessoaBO(new PessoaDAO(new PessoaModel()));
 
         $resultado = $PessoaBO->criar($pessoa);
 
