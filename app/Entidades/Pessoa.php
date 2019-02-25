@@ -72,6 +72,10 @@ class Pessoa extends \stdClass
     {
         $this->model = PessoaModel::find($this->id);
 
+        if (empty($this->model)) {
+            throw new \Exception('Pessoa não encontrada', 400);
+        }
+
         $this->model->nome = $this->nome;
         $this->model->cpf = $this->cpf;
         $this->model->email = $this->email;
@@ -89,6 +93,10 @@ class Pessoa extends \stdClass
     public function excluir($id)
     {
         $this->model = PessoaModel::find($id);
+
+        if (empty($this->model)) {
+            throw new \Exception('Pessoa não encontrada', 400);
+        }
 
         //realizando exclusão lógica do registro
         $this->model->delete();
