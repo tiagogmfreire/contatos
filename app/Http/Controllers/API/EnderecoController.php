@@ -10,9 +10,10 @@ use App\Entidades\Endereco;
 class EnderecoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Método para listar todos os endereços
      *
-     * @return \Illuminate\Http\Response
+     * @param EnderecoBO $enderecoBO
+     * @return void
      */
     public function index(EnderecoBO $enderecoBO)
     {
@@ -22,10 +23,12 @@ class EnderecoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Método para cadastrar um novo endereço
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param EnderecoBO $enderecoBO
+     * @param Endereco $endereco
+     * @return void
      */
     public function store(Request $request, EnderecoBO $enderecoBO, Endereco $endereco)
     {
@@ -49,10 +52,11 @@ class EnderecoController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Método para detalhar um endereço
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @param EnderecoBO $enderecoBO
+     * @return void
      */
     public function show($id, EnderecoBO $enderecoBO)
     {
@@ -62,11 +66,13 @@ class EnderecoController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Método para atualizar um endereço
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param EnderecoBO $enderecoBO
+     * @param Endereco $endereco
+     * @param int $id
+     * @return void
      */
     public function update(Request $request, EnderecoBO $enderecoBO, Endereco $endereco, $id)
     {
@@ -91,10 +97,11 @@ class EnderecoController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Método que faz a remoção lógica de um endereço
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @param EnderecoBO $enderecoBO
+     * @return void
      */
     public function destroy($id, EnderecoBO $enderecoBO)
     {
@@ -113,6 +120,14 @@ class EnderecoController extends Controller
         );
     }
 
+    /**
+     * Método para tratar o retorno da requisição
+     *
+     * @param boolean $resultado
+     * @param string $sucesso
+     * @param string $erro
+     * @return void
+     */
     public function retorno($resultado, $sucesso = 'Operação realizada com sucesso!', $erro = 'Erro ao realizar operação')
     {
         $status = '';
@@ -132,6 +147,13 @@ class EnderecoController extends Controller
         ); 
     }
 
+     /**
+     * Método para validar parâmetros
+     *
+     * @param Pessoa $pessoa
+     * @param boolean $criar
+     * @return void
+     */
     public function validar(Endereco $endereco, $criar = false)
     {
         $msg = '';
@@ -170,6 +192,13 @@ class EnderecoController extends Controller
         }
     }
 
+    /**
+     * Método para remover caracteres não numéricos
+     * de uma string
+     *
+     * @param string $numero
+     * @return void
+     */
     public function filtrarNumero($numero)
     {
         return preg_replace('/\D/', '', $numero);

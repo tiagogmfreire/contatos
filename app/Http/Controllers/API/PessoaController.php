@@ -11,9 +11,10 @@ use Nexmo\Client\Response\Response;
 class PessoaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Método que lista todas as pessoas
      *
-     * @return \Illuminate\Http\Response
+     * @param PessoaBO $pessoaBO
+     * @return void
      */
     public function index(PessoaBO $pessoaBO)
     {
@@ -23,10 +24,12 @@ class PessoaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Método que cadastra uma pessoa
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param PessoaBO $pessoaBO
+     * @param Pessoa $pessoa
+     * @return void
      */
     public function store(Request $request, PessoaBO $pessoaBO, Pessoa $pessoa)
     { 
@@ -47,10 +50,11 @@ class PessoaController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Método que detalha uma pessoa
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @param PessoaBO $pessoaBO
+     * @return void
      */
     public function show($id, PessoaBO $pessoaBO)
     {
@@ -60,11 +64,13 @@ class PessoaController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Método que atualiza uma pessoa
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param PessoaBO $pessoaBO
+     * @param Pessoa $pessoa
+     * @param int $id
+     * @return void
      */
     public function update(Request $request, PessoaBO $pessoaBO, Pessoa $pessoa, $id)
     {
@@ -86,20 +92,15 @@ class PessoaController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Método que faz a remoção lógica de uma pessoa
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @param PessoaBO $pessoaBO
+     * @return void
      */
     public function destroy($id, PessoaBO $pessoaBO)
     {
         $resultado = $pessoaBO->excluir($id);
-
-        /*
-        if (empty($id)) {
-            throw new \Exception("ID da pessoa é obrigatório", 400);
-        }
-        */
 
         return $this->retorno(
             $resultado,
@@ -108,6 +109,14 @@ class PessoaController extends Controller
         );
     }
 
+    /**
+     * Método para tratar o retorno da requisição
+     *
+     * @param boolean $resultado
+     * @param string $sucesso
+     * @param string $erro
+     * @return void
+     */
     public function retorno($resultado, $sucesso = 'Operação realizada com sucesso!', $erro = 'Erro ao realizar operação')
     {
         $status = '';
@@ -127,6 +136,13 @@ class PessoaController extends Controller
         ); 
     }
 
+    /**
+     * Método para validar parâmetros
+     *
+     * @param Pessoa $pessoa
+     * @param boolean $criar
+     * @return void
+     */
     public function validar(Pessoa $pessoa, $criar = false)
     {
         $msg = '';
@@ -158,6 +174,13 @@ class PessoaController extends Controller
         }
     }
 
+    /**
+     * Método para remover caracteres não numéricos
+     * de uma string
+     *
+     * @param string $numero
+     * @return void
+     */
     public function filtrarNumero($numero)
     {
         return preg_replace('/\D/', '', $numero);
