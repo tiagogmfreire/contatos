@@ -48,7 +48,7 @@ class Handler extends ExceptionHandler
     {
         return response()->json(
             ['msg' => $exception->getMessage()], 
-            $exception->getCode() == 400 ? 400 : 500
+            in_array($exception->getCode(), [200,400, 401, 402, 403]) ? $exception->getCode() : 500
         ); 
     }
 }
