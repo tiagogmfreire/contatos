@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\BO\PessoaBO;
 use App\Entidades\Pessoa;
 use Nexmo\Client\Response\Response;
 
@@ -13,7 +12,7 @@ class PessoaController extends Controller
     /**
      * Método que lista todas as pessoas
      *
-     * @param PessoaBO $pessoaBO
+     * @param Pessoa $pessoa
      * @return void
      */
     public function index(Pessoa $pessoa)
@@ -27,7 +26,6 @@ class PessoaController extends Controller
      * Método que cadastra uma pessoa
      *
      * @param Request $request
-     * @param PessoaBO $pessoaBO
      * @param Pessoa $pessoa
      * @return void
      */
@@ -53,7 +51,7 @@ class PessoaController extends Controller
      * Método que detalha uma pessoa
      *
      * @param int $id
-     * @param PessoaBO $pessoaBO
+     * @param Pessoa $pessoa
      * @return void
      */
     public function show($id, Pessoa $pessoa)
@@ -67,7 +65,6 @@ class PessoaController extends Controller
      * Método que atualiza uma pessoa
      *
      * @param Request $request
-     * @param PessoaBO $pessoaBO
      * @param Pessoa $pessoa
      * @param int $id
      * @return void
@@ -95,7 +92,7 @@ class PessoaController extends Controller
      * Método que faz a remoção lógica de uma pessoa
      *
      * @param int $id
-     * @param PessoaBO $pessoaBO
+     * @param Pessoa $pessoa
      * @return void
      */
     public function destroy($id, Pessoa $pessoa)

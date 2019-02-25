@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\BO\EnderecoBO;
 use App\Entidades\Endereco;
 
 class EnderecoController extends Controller
@@ -12,7 +11,7 @@ class EnderecoController extends Controller
     /**
      * Método para listar todos os endereços
      *
-     * @param EnderecoBO $enderecoBO
+     * @param Endereco $endereco
      * @return void
      */
     public function index(Endereco $endereco)
@@ -26,7 +25,6 @@ class EnderecoController extends Controller
      * Método para cadastrar um novo endereço
      *
      * @param Request $request
-     * @param EnderecoBO $enderecoBO
      * @param Endereco $endereco
      * @return void
      */
@@ -55,7 +53,7 @@ class EnderecoController extends Controller
      * Método para detalhar um endereço
      *
      * @param int $id
-     * @param EnderecoBO $enderecoBO
+     * @param Endereco $endereco
      * @return void
      */
     public function show($id, Endereco $endereco)
@@ -69,7 +67,6 @@ class EnderecoController extends Controller
      * Método para atualizar um endereço
      *
      * @param Request $request
-     * @param EnderecoBO $enderecoBO
      * @param Endereco $endereco
      * @param int $id
      * @return void
@@ -100,7 +97,7 @@ class EnderecoController extends Controller
      * Método que faz a remoção lógica de um endereço
      *
      * @param int $id
-     * @param EnderecoBO $enderecoBO
+     * @param Endereco $endereco
      * @return void
      */
     public function destroy($id, Endereco $endereco)
