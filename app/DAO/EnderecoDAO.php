@@ -17,7 +17,7 @@ class EnderecoDAO
 
     public function listar()
     { 
-
+        return EnderecoModel::all();
     }
 
     public function detalhar($id)

@@ -14,11 +14,11 @@ class EnderecoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(PessoaBO $pessoaBO)
+    public function index(EnderecoBO $enderecoBO)
     {
-        $pessoas = $pessoaBO->listar();
+        $enderecos = $enderecoBO->listar();
 
-        return response()->json($pessoas);
+        return response()->json($enderecos);
     }
 
     /**
