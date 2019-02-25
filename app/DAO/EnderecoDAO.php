@@ -22,7 +22,7 @@ class EnderecoDAO
 
     public function detalhar($id)
     {
-
+        return EnderecoModel::find($id);
     }
 
     public function criar(Endereco $endereco)

@@ -54,9 +54,9 @@ class EnderecoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, PessoaBO $pessoaBO)
+    public function show($id, EnderecoBO $enderecoBO)
     {
-        $pessoa = $pessoaBO->detalhar($id);
+        $pessoa = $enderecoBO->detalhar($id);
 
         return response()->json($pessoa);
     }
