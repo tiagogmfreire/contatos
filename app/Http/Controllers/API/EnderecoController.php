@@ -68,22 +68,25 @@ class EnderecoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PessoaBO $pessoaBO, Pessoa $pessoa, $id)
+    public function update(Request $request, EnderecoBO $enderecoBO, Endereco $endereco, $id)
     {
-        $pessoa->id = $id;
-        $pessoa->nome = $request->input('nome');
-        $pessoa->cpf = $this->filtrarNumero($request->input('cpf'));
-        $pessoa->email = $request->input('email');        
-        $pessoa->telefone = $this->filtrarNumero($request->input('telefone'));
+        $endereco->id = $id;
+        $endereco->pessoa_id = $request->input('pessoa_id');
+        $endereco->uf = $request->input('uf');
+        $endereco->logradouro = $request->input('logradouro');
+        $endereco->complemento = $request->input('complemento');
+        $endereco->bairro = $request->input('bairro');
+        $endereco->cidade = $request->input('cidade');
+        $endereco->cep = $this->filtrarNumero($request->input('cep'));
 
-        $this->validar($pessoa, true);
+        $this->validar($endereco, true);
 
-        $resultado = $pessoaBO->atualizar($pessoa);
+        $resultado = $enderecoBO->atualizar($endereco);
 
         return $this->retorno(
             $resultado,
-            'Pessoa atualizada com sucesso!',
-            'Erro ao atualizar pessoa!'
+            'Endereco atualizado com sucesso!',
+            'Erro ao atualizar endereco!'
         );
     }
 
@@ -155,6 +158,10 @@ class EnderecoController extends Controller
 
         if (empty($endereco->cep)) {
             $msg .= 'Parâmetro "cep" Não pode ser vazio; ';
+        }
+
+        if ($criar && empty($endereco->id)) {
+            $msg .= 'ID do endereço não informado; ';            
         }
 
         //se a mensagem de validação não for vazia, dispara uma exceção

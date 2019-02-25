@@ -46,9 +46,19 @@ class EnderecoDAO
         */
     }
 
-    public function atualizar(EnderecoModel $enderecoModel)
+    public function atualizar(Endereco $endereco)
     {
+        $this->model = EnderecoModel::find($endereco->id);
 
+        $this->model->pessoa_id = $endereco->pessoa_id;
+        $this->model->uf_id = $this->buscarUF($endereco->uf);
+        $this->model->logradouro = $endereco->logradouro;
+        $this->model->complemento = $endereco->complemento;
+        $this->model->bairro = $endereco->bairro;
+        $this->model->cidade = $endereco->cidade;
+        $this->model->cep = $endereco->cep;
+
+        return $this->model->save();
     }
     
     public function excluir($id)

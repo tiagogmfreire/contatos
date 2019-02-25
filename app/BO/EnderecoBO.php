@@ -30,9 +30,9 @@ class EnderecoBO
         return $this->dao->criar($endereco);
     }
 
-    public function atualizar(EnderecoModel $enderecoModel)
+    public function atualizar(Endereco $endereco)
     {   
-        return $this->dao->atualizar($enderecoModel);
+        return $this->dao->atualizar($endereco);
     }
 
     public function excluir($id)
