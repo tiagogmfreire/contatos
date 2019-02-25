@@ -4,6 +4,7 @@ namespace App\BO;
 
 use App\DAO\EnderecoDAO;
 use App\Model\EnderecoModel;
+use App\Entidades\Endereco;
 
 class EnderecoBO
 {
@@ -24,9 +25,9 @@ class EnderecoBO
         return $this->dao->detalhar($id);
     }
 
-    public function criar(EnderecoModel $enderecoModel)
+    public function criar(Endereco $endereco)
     { 
-        return $this->dao->criar($enderecoModel);
+        return $this->dao->criar($endereco);
     }
 
     public function atualizar(EnderecoModel $enderecoModel)

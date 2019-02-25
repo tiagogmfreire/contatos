@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\BO\EnderecoBO;
+use App\Entidades\Endereco;
 
 class EnderecoController extends Controller
 {
@@ -12,9 +14,11 @@ class EnderecoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(PessoaBO $pessoaBO)
     {
-        //
+        $pessoas = $pessoaBO->listar();
+
+        return response()->json($pessoas);
     }
 
     /**
@@ -23,9 +27,25 @@ class EnderecoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, EnderecoBO $enderecoBO, Endereco $endereco)
     {
-        //
+        $endereco->pessoa_id = $request->input('pessoa_id');
+        $endereco->uf = $request->input('uf');
+        $endereco->logradouro = $request->input('logradouro');
+        $endereco->complemento = $request->input('complemento');
+        $endereco->bairro = $request->input('bairro');
+        $endereco->cidade = $request->input('cidade');
+        $endereco->cep = $request->input('cep');
+
+        $this->validar($endereco);
+
+        $resultado = $enderecoBO->criar($endereco);
+
+        return $this->retorno(
+            $resultado,
+            'Endereco cadastrado com sucesso!',
+            'Erro ao cadastrar endereco!'
+        );
     }
 
     /**
@@ -34,9 +54,11 @@ class EnderecoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, PessoaBO $pessoaBO)
     {
-        //
+        $pessoa = $pessoaBO->detalhar($id);
+
+        return response()->json($pessoa);
     }
 
     /**
@@ -46,9 +68,23 @@ class EnderecoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, PessoaBO $pessoaBO, Pessoa $pessoa, $id)
     {
-        //
+        $pessoa->id = $id;
+        $pessoa->nome = $request->input('nome');
+        $pessoa->cpf = $this->filtrarNumero($request->input('cpf'));
+        $pessoa->email = $request->input('email');        
+        $pessoa->telefone = $this->filtrarNumero($request->input('telefone'));
+
+        $this->validar($pessoa, true);
+
+        $resultado = $pessoaBO->atualizar($pessoa);
+
+        return $this->retorno(
+            $resultado,
+            'Pessoa atualizada com sucesso!',
+            'Erro ao atualizar pessoa!'
+        );
     }
 
     /**
@@ -57,8 +93,54 @@ class EnderecoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, PessoaBO $pessoaBO)
     {
-        //
+        $resultado = $pessoaBO->excluir($id);
+
+        /*
+        if (empty($id)) {
+            throw new \Exception("ID da pessoa é obrigatório", 400);
+        }
+        */
+
+        return $this->retorno(
+            $resultado,
+            'Pessoa excluída com sucesso!',
+            'Erro ao excluir pessoa!'
+        );
+    }
+
+    public function retorno($resultado, $sucesso = 'Operação realizada com sucesso!', $erro = 'Erro ao realizar operação')
+    {
+        $status = '';
+        $msg = '';
+
+        if ($resultado) {
+            $status = 200;
+            $msg = $sucesso;
+        } else {
+            $msg = $erro;
+            $status = 500;
+        }
+
+        return response()->json(
+            ['msg' => $msg], 
+            $status
+        ); 
+    }
+
+    public function validar(Endereco $endereco, $criar = false)
+    {
+        $msg = '';
+
+        //se a mensagem de validação não for vazia, dispara uma exceção
+        if (!empty($msg)) {
+            throw new \Exception($msg, 400);
+        }
+    }
+
+    public function filtrarNumero($numero)
+    {
+        return preg_replace('/\D/', '', $numero);
     }
 }
