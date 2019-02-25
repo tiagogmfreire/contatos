@@ -3,6 +3,7 @@
 namespace App\Entidades;
 
 use App\Model\EnderecoModel;
+use App\Model\UFModel;
 
 class Endereco extends \stdClass
 {

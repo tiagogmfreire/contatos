@@ -15,9 +15,9 @@ class EnderecoController extends Controller
      * @param EnderecoBO $enderecoBO
      * @return void
      */
-    public function index(EnderecoBO $enderecoBO)
+    public function index(Endereco $endereco)
     {
-        $enderecos = $enderecoBO->listar();
+        $enderecos = $endereco->listar();
 
         return response()->json($enderecos);
     }
@@ -30,7 +30,7 @@ class EnderecoController extends Controller
      * @param Endereco $endereco
      * @return void
      */
-    public function store(Request $request, EnderecoBO $enderecoBO, Endereco $endereco)
+    public function store(Request $request, Endereco $endereco)
     {
         $endereco->pessoa_id = $request->input('pessoa_id');
         $endereco->uf = $request->input('uf');
@@ -42,7 +42,7 @@ class EnderecoController extends Controller
 
         $this->validar($endereco);
 
-        $resultado = $enderecoBO->criar($endereco);
+        $resultado = $endereco->criar($endereco);
 
         return $this->retorno(
             $resultado,
@@ -58,9 +58,9 @@ class EnderecoController extends Controller
      * @param EnderecoBO $enderecoBO
      * @return void
      */
-    public function show($id, EnderecoBO $enderecoBO)
+    public function show($id, Endereco $endereco)
     {
-        $pessoa = $enderecoBO->detalhar($id);
+        $pessoa = $endereco->detalhar($id);
 
         return response()->json($pessoa);
     }
@@ -74,7 +74,7 @@ class EnderecoController extends Controller
      * @param int $id
      * @return void
      */
-    public function update(Request $request, EnderecoBO $enderecoBO, Endereco $endereco, $id)
+    public function update(Request $request, Endereco $endereco, $id)
     {
         $endereco->id = $id;
         $endereco->pessoa_id = $request->input('pessoa_id');
@@ -87,7 +87,7 @@ class EnderecoController extends Controller
 
         $this->validar($endereco, true);
 
-        $resultado = $enderecoBO->atualizar($endereco);
+        $resultado = $endereco->atualizar();
 
         return $this->retorno(
             $resultado,
@@ -103,9 +103,9 @@ class EnderecoController extends Controller
      * @param EnderecoBO $enderecoBO
      * @return void
      */
-    public function destroy($id, EnderecoBO $enderecoBO)
+    public function destroy($id, Endereco $endereco)
     {
-        $resultado = $enderecoBO->excluir($id);
+        $resultado = $endereco->excluir($id);
 
         /*
         if (empty($id)) {
