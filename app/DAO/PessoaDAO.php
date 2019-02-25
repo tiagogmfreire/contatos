@@ -48,6 +48,12 @@ class PessoaDAO
     
     public function excluir($id)
     {
+        $this->model = PessoaModel::find($id);
 
+        //realizando exclusão lógica do registro
+        $this->model->delete();
+
+        //persistindo alterações
+        return $this->model->save();
     }
 }

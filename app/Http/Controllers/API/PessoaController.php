@@ -93,9 +93,21 @@ class PessoaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, PessoaBO $pessoaBO)
     {
-        //
+        $resultado = $pessoaBO->excluir($id);
+
+        /*
+        if (empty($id)) {
+            throw new \Exception("ID da pessoa é obrigatório", 400);
+        }
+        */
+
+        return $this->retorno(
+            $resultado,
+            'Pessoa excluída com sucesso!',
+            'Erro ao excluir pessoa!'
+        );
     }
 
     public function retorno($resultado, $sucesso = 'Operação realizada com sucesso!', $erro = 'Erro ao realizar operação')
