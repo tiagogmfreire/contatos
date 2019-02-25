@@ -80,6 +80,10 @@ class Endereco extends \stdClass
     {
         $this->model = EnderecoModel::find($this->id);
 
+        if (empty($this->model)) {
+            throw new \Exception('Endereço não encontrado', 400);
+        }
+
         $this->model->pessoa_id = $this->pessoa_id;
         $this->model->uf_id = $this->buscarUF($this->uf);
         $this->model->logradouro = $this->logradouro;
@@ -100,6 +104,10 @@ class Endereco extends \stdClass
     public function excluir($id)
     {
         $this->model = EnderecoModel::find($id);
+
+        if (empty($this->model)) {
+            throw new \Exception('Endereço não encontrado', 400);
+        }
 
         //realizando exclusão lógica do registro
         $this->model->delete();
