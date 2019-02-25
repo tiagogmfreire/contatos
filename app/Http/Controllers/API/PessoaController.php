@@ -82,8 +82,8 @@ class PessoaController extends Controller
 
         return $this->retorno(
             $resultado,
-            'Pessoa cadastrada com sucesso!',
-            'Erro ao cadastrar pessoa!'
+            'Pessoa atualizada com sucesso!',
+            'Erro ao atualizar pessoa!'
         );
     }
 
