@@ -53,7 +53,13 @@ class EnderecoDAO
     
     public function excluir($id)
     {
+        $this->model = EnderecoModel::find($id);
 
+        //realizando exclusão lógica do registro
+        $this->model->delete();
+
+        //persistindo alterações
+        return $this->model->save();
     }
 
     protected function buscarUF($uf)

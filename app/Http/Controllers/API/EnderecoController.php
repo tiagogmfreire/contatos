@@ -93,9 +93,9 @@ class EnderecoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, PessoaBO $pessoaBO)
+    public function destroy($id, EnderecoBO $enderecoBO)
     {
-        $resultado = $pessoaBO->excluir($id);
+        $resultado = $enderecoBO->excluir($id);
 
         /*
         if (empty($id)) {
@@ -105,8 +105,8 @@ class EnderecoController extends Controller
 
         return $this->retorno(
             $resultado,
-            'Pessoa excluída com sucesso!',
-            'Erro ao excluir pessoa!'
+            'Endereço excluído com sucesso!',
+            'Erro ao excluir endereço!'
         );
     }
 
