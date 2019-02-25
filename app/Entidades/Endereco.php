@@ -117,7 +117,11 @@ class Endereco extends \stdClass
      */
     protected function buscarUF($uf)
     {
-        $uf = UFModel::where('uf',$uf)->first();
+        $uf = UFModel::where('uf',strtoupper($uf))->first();
+
+        if (empty($uf)) {
+            throw new \Exception('A UF informada não é valida!', 400);
+        }
 
         return $uf->id;
     }
