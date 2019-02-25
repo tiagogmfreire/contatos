@@ -4,9 +4,7 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\PessoaModel;
 use App\BO\PessoaBO;
-use App\DAO\PessoaDAO;
 use App\Entidades\Pessoa;
 use Nexmo\Client\Response\Response;
 
