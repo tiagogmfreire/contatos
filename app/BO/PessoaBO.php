@@ -30,9 +30,9 @@ class PessoaBO
         return $this->dao->criar($pessoa);
     }
 
-    public function atualizar(PessoaModel $pessoaModel)
+    public function atualizar(Pessoa $pessoa)
     {   
-        return $this->dao->atualizar($pessoaModel);
+        return $this->dao->atualizar($pessoa);
     }
 
     public function excluir($id)

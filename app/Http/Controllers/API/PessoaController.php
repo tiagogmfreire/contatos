@@ -68,9 +68,23 @@ class PessoaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, PessoaBO $pessoaBO, Pessoa $pessoa, $id)
     {
-        //
+        $pessoa->id = $id;
+        $pessoa->nome = $request->input('nome');
+        $pessoa->cpf = $this->filtrarNumero($request->input('cpf'));
+        $pessoa->email = $request->input('email');        
+        $pessoa->telefone = $this->filtrarNumero($request->input('telefone'));
+
+        $this->validar($pessoa, true);
+
+        $resultado = $pessoaBO->atualizar($pessoa);
+
+        return $this->retorno(
+            $resultado,
+            'Pessoa cadastrada com sucesso!',
+            'Erro ao cadastrar pessoa!'
+        );
     }
 
     /**
@@ -103,7 +117,7 @@ class PessoaController extends Controller
         ); 
     }
 
-    public function validar(Pessoa $pessoa)
+    public function validar(Pessoa $pessoa, $criar = false)
     {
         $msg = '';
 
@@ -122,6 +136,10 @@ class PessoaController extends Controller
         //usando extensão multibyte para contar corretamente o Nº de caracteres de uma string UTF-8
         if (mb_strlen($pessoa->cpf) != 11) {
             $msg .= 'O Parmâmetro "cpf" deve ter 11 caracteres (pontos e traços são ignorados); ';            
+        }
+
+        if ($criar && empty($pessoa->id)) {
+            $msg .= 'ID da pessoa não informado; ';            
         }
 
         //se a mensagem de validação não for vazia, dispara uma exceção
