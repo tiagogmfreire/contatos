@@ -16,9 +16,9 @@ class PessoaController extends Controller
      * @param PessoaBO $pessoaBO
      * @return void
      */
-    public function index(PessoaBO $pessoaBO)
+    public function index(Pessoa $pessoa)
     {
-        $pessoas = $pessoaBO->listar();
+        $pessoas = $pessoa->listar();
 
         return response()->json($pessoas);
     }
@@ -31,7 +31,7 @@ class PessoaController extends Controller
      * @param Pessoa $pessoa
      * @return void
      */
-    public function store(Request $request, PessoaBO $pessoaBO, Pessoa $pessoa)
+    public function store(Request $request, Pessoa $pessoa)
     { 
         $pessoa->nome = $request->input('nome');
         $pessoa->cpf = $this->filtrarNumero($request->input('cpf'));
@@ -40,7 +40,7 @@ class PessoaController extends Controller
 
         $this->validar($pessoa);
 
-        $resultado = $pessoaBO->criar($pessoa);
+        $resultado = $pessoa->criar();
 
         return $this->retorno(
             $resultado,
@@ -56,9 +56,9 @@ class PessoaController extends Controller
      * @param PessoaBO $pessoaBO
      * @return void
      */
-    public function show($id, PessoaBO $pessoaBO)
+    public function show($id, Pessoa $pessoa)
     {
-        $pessoa = $pessoaBO->detalhar($id);
+        $pessoa = $pessoa->detalhar($id);
 
         return response()->json($pessoa);
     }
@@ -72,7 +72,7 @@ class PessoaController extends Controller
      * @param int $id
      * @return void
      */
-    public function update(Request $request, PessoaBO $pessoaBO, Pessoa $pessoa, $id)
+    public function update(Request $request, Pessoa $pessoa, $id)
     {
         $pessoa->id = $id;
         $pessoa->nome = $request->input('nome');
@@ -82,7 +82,7 @@ class PessoaController extends Controller
 
         $this->validar($pessoa, true);
 
-        $resultado = $pessoaBO->atualizar($pessoa);
+        $resultado = $pessoa->atualizar();
 
         return $this->retorno(
             $resultado,
@@ -98,9 +98,9 @@ class PessoaController extends Controller
      * @param PessoaBO $pessoaBO
      * @return void
      */
-    public function destroy($id, PessoaBO $pessoaBO)
+    public function destroy($id, Pessoa $pessoa)
     {
-        $resultado = $pessoaBO->excluir($id);
+        $resultado = $pessoa->excluir($id);
 
         return $this->retorno(
             $resultado,

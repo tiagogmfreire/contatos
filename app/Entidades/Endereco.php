@@ -2,6 +2,8 @@
 
 namespace App\Entidades;
 
+use App\Model\EnderecoModel;
+
 class Endereco extends \stdClass
 {
     public $id;

@@ -2,6 +2,8 @@
 
 namespace App\Entidades;
 
+use App\Model\PessoaModel;
+
 class Pessoa extends \stdClass
 {
     public $id;
