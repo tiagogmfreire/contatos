@@ -35,7 +35,7 @@ class EnderecoController extends Controller
         $endereco->complemento = $request->input('complemento');
         $endereco->bairro = $request->input('bairro');
         $endereco->cidade = $request->input('cidade');
-        $endereco->cep = $request->input('cep');
+        $endereco->cep = $this->filtrarNumero($request->input('cep'));
 
         $this->validar($endereco);
 
@@ -132,6 +132,30 @@ class EnderecoController extends Controller
     public function validar(Endereco $endereco, $criar = false)
     {
         $msg = '';
+
+        if (empty($endereco->pessoa_id)) {
+            $msg .= 'Parâmetro "pessoa_id" Não pode ser vazio; ';
+        }
+
+        if (empty($endereco->uf)) {
+            $msg .= 'Parâmetro "uf" Não pode ser vazio; ';
+        }
+
+        if (empty($endereco->logradouro)) {
+            $msg .= 'Parâmetro "logradouro" Não pode ser vazio; ';
+        }
+
+        if (empty($endereco->bairro)) {
+            $msg .= 'Parâmetro "bairro" Não pode ser vazio; ';
+        }
+
+        if (empty($endereco->cidade)) {
+            $msg .= 'Parâmetro "cidade" Não pode ser vazio; ';
+        }
+
+        if (empty($endereco->cep)) {
+            $msg .= 'Parâmetro "cep" Não pode ser vazio; ';
+        }
 
         //se a mensagem de validação não for vazia, dispara uma exceção
         if (!empty($msg)) {
