@@ -15,4 +15,5 @@ class PessoaModel extends Model
     protected $table = 'pessoa';    
     protected $fillable = array('*');
     protected $guarded = ['id'];
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 }

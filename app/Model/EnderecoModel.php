@@ -15,4 +15,5 @@ class EnderecoModel extends Model
     protected $table = 'endereco';    
     protected $fillable = array('*');
     protected $guarded = ['id'];
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 }
