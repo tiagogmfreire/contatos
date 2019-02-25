@@ -16,4 +16,9 @@ class PessoaModel extends Model
     protected $fillable = array('*');
     protected $guarded = ['id'];
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
+
+    public function enderecos()
+    {
+        return $this->hasMany('App\Model\EnderecoModel', 'pessoa_id', 'id');
+    }
 }
