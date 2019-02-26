@@ -127,7 +127,7 @@ class Endereco extends \stdClass
      * @param string $uf
      * @return int
      */
-    protected function buscarUF($uf)
+    public function buscarUF($uf)
     {
         $uf = UFModel::where('uf',strtoupper($uf))->first();
 
