@@ -36,3 +36,8 @@ A implementação dos testes unitários está na pasta /tests nos arquivos Pesso
 
 Documentação da API gerada com Postman disponível em:
 https://documenter.getpostman.com/view/891227/S11Huenq
+
+
+### Postman
+
+A coleção do Postman usada para testar a API foi exportada para /Contatos.postman_collection.json
