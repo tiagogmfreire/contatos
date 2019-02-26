@@ -96,7 +96,7 @@ class PessoaTest extends TestCase
     }
 
     /**
-     * Teste de nome vazio
+     * Teste de CPF maior que 11 chars
      *
      * @return void
      */
@@ -107,6 +107,42 @@ class PessoaTest extends TestCase
 
         $pessoa->nome = 'teste';
         $pessoa->cpf = '1111111111';
+
+        $this->expectException(CustomException::class);
+
+        $pessoa->criar(0);
+    }
+
+    /**
+     * Teste de CPF menor que 11 chars
+     *
+     * @return void
+     */
+    public function testCPFMaior()
+    {
+        $pessoaModel = new PessoaModel();
+        $pessoa = new Pessoa($pessoaModel);
+
+        $pessoa->nome = 'teste';
+        $pessoa->cpf = '1111111111111111111';
+
+        $this->expectException(CustomException::class);
+
+        $pessoa->criar(0);
+    }
+
+    /**
+     * Teste de e-mail vazio
+     *
+     * @return void
+     */
+    public function testEmailVazio()
+    {
+        $pessoaModel = new PessoaModel();
+        $pessoa = new Pessoa($pessoaModel);
+
+        $pessoa->nome = 'teste';
+        $pessoa->cpf = '01458102165';
 
         $this->expectException(CustomException::class);
 

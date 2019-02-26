@@ -69,6 +69,10 @@ class Pessoa extends \stdClass
             throw new CustomException('Parâmetro "cpf" inválido!', 400);
         }
 
+        if (empty($this->email)) {
+            throw new CustomException('Parâmetro "email" não pode ser vazio!', 400);
+        }
+
         $this->model->nome = $this->nome;
         $this->model->cpf = $this->cpf;
         $this->model->email = $this->email;
