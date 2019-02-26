@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Exceptions\CustomException;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -20,7 +21,7 @@ class PessoaTest extends TestCase
         $pessoaModel = new PessoaModel();
         $pessoa = new Pessoa($pessoaModel);
 
-        $this->expectException(\Exception::class);
+        $this->expectException(CustomException::class);
 
         $pessoa->detalhar(0);
     }
@@ -37,7 +38,7 @@ class PessoaTest extends TestCase
 
         $pessoa->id = 0;
 
-        $this->expectException(\Exception::class);
+        $this->expectException(CustomException::class);
 
         $pessoa->atualizar();
     }
@@ -54,8 +55,25 @@ class PessoaTest extends TestCase
 
         $pessoa->id = 0;
 
-        $this->expectException(\Exception::class);
+        $this->expectException(CustomException::class);
 
         $pessoa->excluir(0);
+    }
+
+    /**
+     * Teste de nome vazio
+     *
+     * @return void
+     */
+    public function testCriarNomeVazio()
+    {
+        $pessoaModel = new PessoaModel();
+        $pessoa = new Pessoa($pessoaModel);
+
+        $pessoa->nome = '';
+
+        $this->expectException(CustomException::class);
+
+        $pessoa->criar(0);
     }
 }

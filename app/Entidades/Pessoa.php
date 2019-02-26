@@ -3,6 +3,7 @@
 namespace App\Entidades;
 
 use App\Model\PessoaModel;
+use App\Exceptions\CustomException;
 
 /**
  * Classe para a entidade Pessoa
@@ -46,7 +47,7 @@ class Pessoa extends \stdClass
     public function detalhar($id)
     {
         if (empty($id)) {
-            throw new \Exception("ID da pessoa não informado", 400);
+            throw new CustomException("ID da pessoa não informado", 400);
         }
 
         return PessoaModel::find($id)->with('enderecos')->first();
@@ -59,6 +60,10 @@ class Pessoa extends \stdClass
      */
     public function criar()
     { 
+        if (empty($this->nome)) {
+            throw new CustomException('Parâmetro "nome" não pode ser vazio!', 400);
+        }
+
         $this->model->nome = $this->nome;
         $this->model->cpf = $this->cpf;
         $this->model->email = $this->email;
@@ -77,7 +82,7 @@ class Pessoa extends \stdClass
         $this->model = PessoaModel::find($this->id);
 
         if (empty($this->model)) {
-            throw new \Exception('Pessoa não encontrada', 400);
+            throw new CustomException('Pessoa não encontrada', 400);
         }
 
         $this->model->nome = $this->nome;
@@ -99,7 +104,7 @@ class Pessoa extends \stdClass
         $this->model = PessoaModel::find($id);
 
         if (empty($this->model)) {
-            throw new \Exception('Pessoa não encontrada', 400);
+            throw new CustomException('Pessoa não encontrada', 400);
         }
 
         //realizando exclusão lógica do registro
