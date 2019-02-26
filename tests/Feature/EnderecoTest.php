@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Model\EnderecoModel;
 use App\Entidades\Endereco;
+use App\Exceptions\CustomException;
 
 class EnderecoTest extends TestCase
 {
@@ -20,7 +21,7 @@ class EnderecoTest extends TestCase
         $enderecoModel = new EnderecoModel();
         $endereco = new Endereco($enderecoModel);
 
-        $this->expectException(\Exception::class);
+        $this->expectException(CustomException::class);
 
         $endereco->detalhar(0);
     }
@@ -37,7 +38,7 @@ class EnderecoTest extends TestCase
 
         $endereco->id = 0;
 
-        $this->expectException(\Exception::class);
+        $this->expectException(CustomException::class);
 
         $endereco->atualizar();
     }
@@ -54,7 +55,7 @@ class EnderecoTest extends TestCase
 
         $endereco->id = 0;
 
-        $this->expectException(\Exception::class);
+        $this->expectException(CustomException::class);
 
         $endereco->excluir(0);
     }
@@ -64,8 +65,91 @@ class EnderecoTest extends TestCase
         $enderecoModel = new EnderecoModel();
         $endereco = new Endereco($enderecoModel);
 
-        $this->expectException(\Exception::class);
+        $this->expectException(CustomException::class);
 
         $uf = $endereco->buscarUF('XX');
+    }
+
+    public function testCriarPessoaIdVazio()
+    {
+        $enderecoModel = new EnderecoModel();
+        $endereco = new Endereco($enderecoModel);
+        
+        $endereco->uf = 'DF';
+
+        $this->expectException(CustomException::class);
+
+        $endereco->criar();        
+    }
+
+    public function testCriarUfVazia()
+    {
+        $enderecoModel = new EnderecoModel();
+        $endereco = new Endereco($enderecoModel);
+        
+        $endereco->pessoa_id = 1;
+        $endereco->uf = '';
+
+        $this->expectException(CustomException::class);
+
+        $endereco->criar();        
+    }
+
+    public function testLogradrouroVazio()
+    {
+        $enderecoModel = new EnderecoModel();
+        $endereco = new Endereco($enderecoModel);
+        
+        $endereco->pessoa_id = 1;
+        $endereco->uf = 'DF';        
+
+        $this->expectException(CustomException::class);
+
+        $endereco->criar();        
+    }
+
+    public function testBairroVazio()
+    {
+        $enderecoModel = new EnderecoModel();
+        $endereco = new Endereco($enderecoModel);
+        
+        $endereco->pessoa_id = 1;
+        $endereco->uf = 'DF';     
+        $endereco->logradouro = 'teste';   
+
+        $this->expectException(CustomException::class);
+
+        $endereco->criar();        
+    }
+
+    public function testCidadeVazio()
+    {
+        $enderecoModel = new EnderecoModel();
+        $endereco = new Endereco($enderecoModel);
+        
+        $endereco->pessoa_id = 1;
+        $endereco->uf = 'DF';     
+        $endereco->logradouro = 'teste';   
+        $endereco->bairro = 'teste';   
+
+        $this->expectException(CustomException::class);
+
+        $endereco->criar();        
+    }
+
+    public function testCepVazio()
+    {
+        $enderecoModel = new EnderecoModel();
+        $endereco = new Endereco($enderecoModel);
+        
+        $endereco->pessoa_id = 1;
+        $endereco->uf = 'DF';     
+        $endereco->logradouro = 'teste';   
+        $endereco->bairro = 'teste';   
+        $endereco->cidade = 'teste';   
+
+        $this->expectException(CustomException::class);
+
+        $endereco->criar();        
     }
 }
