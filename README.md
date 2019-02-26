@@ -32,6 +32,7 @@ Os testes unitários são providos pela integração com o PHPUnit do Laravel e 
 
 A implementação dos testes unitários está na pasta /tests nos arquivos PessoaTest.php e EnderecoTest.php
 
-### Modelos
+### Especificação API
 
-O sistema utiliza a implementação de modelos default do Laravel baseada no Eloquent que estão no namespace App/Model.
+Especificação da API gerada com Postman disponível em:
+https://documenter.getpostman.com/view/891227/S11Huenq
