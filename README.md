@@ -32,7 +32,7 @@ Os testes unitários são providos pela integração com o PHPUnit do Laravel e 
 
 A implementação dos testes unitários está na pasta /tests nos arquivos PessoaTest.php e EnderecoTest.php
 
-### Especificação API
+### Documentação da API
 
-Especificação da API gerada com Postman disponível em:
+Documentação da API gerada com Postman disponível em:
 https://documenter.getpostman.com/view/891227/S11Huenq
