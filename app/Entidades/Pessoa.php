@@ -45,6 +45,10 @@ class Pessoa extends \stdClass
      */
     public function detalhar($id)
     {
+        if (empty($id)) {
+            throw new \Exception("ID da pessoa não informado", 400);
+        }
+
         return PessoaModel::find($id)->with('enderecos')->first();
     }
 

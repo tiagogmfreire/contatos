@@ -50,6 +50,10 @@ class Endereco extends \stdClass
      */
     public function detalhar($id)
     {
+        if (empty($id)) {
+            throw new \Exception("ID do endereço não informado", 400);
+        }
+
         return EnderecoModel::find($id);
     }
 
