@@ -17,11 +17,13 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $pessoas = [
-            ['nome' => 'testador', 'cpf' => '01358702166', 'email' => 'email@email.com', 'telefone' => '981566145']
+            ['nome' => 'testador1', 'cpf' => '01358702166', 'email' => 'email1@email.com', 'telefone' => '981566145'],
+            ['nome' => 'testador2', 'cpf' => '01358702167', 'email' => 'email2@email.com', 'telefone' => '981566145']
         ];
 
         $enderecos = [
-            ['pessoa_id' => 1, 'uf_id' => 1, 'logradouro' => 'logradouro', 'bairro' => 'bairro', 'cidade' => 'cidade', 'cep' => '70660074']
+            ['pessoa_id' => 1, 'uf_id' => 1, 'logradouro' => 'logradouro1', 'bairro' => 'bairro1', 'cidade' => 'cidade1', 'cep' => '70660070'],
+            ['pessoa_id' => 1, 'uf_id' => 1, 'logradouro' => 'logradouro2', 'bairro' => 'bairro2', 'cidade' => 'cidade2', 'cep' => '70660075']
         ];
 
         $ufs = [
