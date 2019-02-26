@@ -82,7 +82,7 @@ class PessoaTest extends TestCase
      *
      * @return void
      */
-    public function testCPFVazio()
+    public function testCriarCPFVazio()
     {
         $pessoaModel = new PessoaModel();
         $pessoa = new Pessoa($pessoaModel);
@@ -100,7 +100,7 @@ class PessoaTest extends TestCase
      *
      * @return void
      */
-    public function testCPFMenor()
+    public function testCriarCPFMenor()
     {
         $pessoaModel = new PessoaModel();
         $pessoa = new Pessoa($pessoaModel);
@@ -118,7 +118,7 @@ class PessoaTest extends TestCase
      *
      * @return void
      */
-    public function testCPFMaior()
+    public function testCriarCPFMaior()
     {
         $pessoaModel = new PessoaModel();
         $pessoa = new Pessoa($pessoaModel);
@@ -136,7 +136,7 @@ class PessoaTest extends TestCase
      *
      * @return void
      */
-    public function testEmailVazio()
+    public function testCriarEmailVazio()
     {
         $pessoaModel = new PessoaModel();
         $pessoa = new Pessoa($pessoaModel);
@@ -147,5 +147,98 @@ class PessoaTest extends TestCase
         $this->expectException(CustomException::class);
 
         $pessoa->criar(0);
+    }
+
+    /**
+     * Teste de nome vazio
+     *
+     * @return void
+     */
+    public function testAtualizarNomeVazio()
+    {
+        $pessoaModel = new PessoaModel();
+        $pessoa = new Pessoa($pessoaModel);
+
+        $pessoa->id = 1;
+        $pessoa->nome = '';
+
+        $this->expectException(CustomException::class);
+
+        $pessoa->atualizar();
+    }
+
+    /**
+     * Teste de nome vazio
+     *
+     * @return void
+     */
+    public function testAtualizarCPFVazio()
+    {
+        $pessoaModel = new PessoaModel();
+        $pessoa = new Pessoa($pessoaModel);
+
+        $pessoa->id = 1;
+        $pessoa->nome = 'teste';
+        $pessoa->cpf = '';
+
+        $this->expectException(CustomException::class);
+
+        $pessoa->atualizar();
+    }
+
+    /**
+     * Teste de nome vazio
+     *
+     * @return void
+     */
+    public function testAtualizarCPFMenor()
+    {
+        $pessoaModel = new PessoaModel();
+        $pessoa = new Pessoa($pessoaModel);
+
+        $pessoa->id = 1;
+        $pessoa->nome = 'teste';
+        $pessoa->cpf = '1111111111';
+
+        $this->expectException(CustomException::class);
+
+        $pessoa->atualizar();
+    }
+
+    /**
+     * Teste de nome vazio
+     *
+     * @return void
+     */
+    public function testAtualizarCPFMaior()
+    {
+        $pessoaModel = new PessoaModel();
+        $pessoa = new Pessoa($pessoaModel);
+
+        $pessoa->id = 1;
+        $pessoa->nome = 'teste';
+        $pessoa->cpf = '111111111111111111111';
+
+        $this->expectException(CustomException::class);
+
+        $pessoa->atualizar();
+    }
+
+    /**
+     * Teste de e-mail vazio
+     *
+     * @return void
+     */
+    public function testAtualizarEmailVazio()
+    {
+        $pessoaModel = new PessoaModel();
+        $pessoa = new Pessoa($pessoaModel);
+
+        $pessoa->nome = 'teste';
+        $pessoa->cpf = '01458102165';
+
+        $this->expectException(CustomException::class);
+
+        $pessoa->atualizar(1);
     }
 }

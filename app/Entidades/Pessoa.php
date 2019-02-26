@@ -94,6 +94,19 @@ class Pessoa extends \stdClass
             throw new CustomException('Pessoa não encontrada', 400);
         }
 
+        if (empty($this->nome)) {
+            throw new CustomException('Parâmetro "nome" não pode ser vazio!', 400);
+        }
+
+        $this->cpf = $this->filtrarNumero($this->cpf);
+        if (empty($this->cpf) || mb_strlen($this->cpf) != 11) {
+            throw new CustomException('Parâmetro "cpf" inválido!', 400);
+        }
+
+        if (empty($this->email)) {
+            throw new CustomException('Parâmetro "email" não pode ser vazio!', 400);
+        }
+
         $this->model->nome = $this->nome;
         $this->model->cpf = $this->cpf;
         $this->model->email = $this->email;
