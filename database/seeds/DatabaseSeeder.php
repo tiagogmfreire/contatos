@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use App\Model\UFModel;
+use App\Model\PessoaModel;
+use App\Model\EnderecoModel;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +16,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $pessoas = [
+            ['nome' => 'testador', 'cpf' => '01358702166', 'email' => 'email@email.com', 'telefone' => '981566145']
+        ];
+
+        $enderecos = [
+            ['pessoa_id' => 1, 'uf_id' => 1, 'logradouro' => 'logradouro', 'bairro' => 'bairro', 'cidade' => 'cidade', 'cep' => '70660074']
+        ];
+
         $ufs = [
             ['uf' => 'AC', 'descricao' => 'Acre'],
             ['uf' => 'AL', 'descricao' => 'Alagoas'],
@@ -47,5 +57,13 @@ class DatabaseSeeder extends Seeder
         foreach ($ufs as $uf) {
            UFModel::create($uf);
         }
+
+        foreach ($pessoas as $pessoa) {
+            PessoaModel::create($pessoa);
+        }     
+
+        foreach ($enderecos as $endereco) {
+            EnderecoModel::create($endereco);
+        } 
     }
 }
