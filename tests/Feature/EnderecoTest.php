@@ -95,7 +95,7 @@ class EnderecoTest extends TestCase
         $endereco->criar();        
     }
 
-    public function testLogradrouroVazio()
+    public function testCriarLogradrouroVazio()
     {
         $enderecoModel = new EnderecoModel();
         $endereco = new Endereco($enderecoModel);
@@ -108,7 +108,7 @@ class EnderecoTest extends TestCase
         $endereco->criar();        
     }
 
-    public function testBairroVazio()
+    public function testCriarBairroVazio()
     {
         $enderecoModel = new EnderecoModel();
         $endereco = new Endereco($enderecoModel);
@@ -122,7 +122,7 @@ class EnderecoTest extends TestCase
         $endereco->criar();        
     }
 
-    public function testCidadeVazio()
+    public function testCriarCidadeVazio()
     {
         $enderecoModel = new EnderecoModel();
         $endereco = new Endereco($enderecoModel);
@@ -137,7 +137,7 @@ class EnderecoTest extends TestCase
         $endereco->criar();        
     }
 
-    public function testCepVazio()
+    public function testCriarCepVazio()
     {
         $enderecoModel = new EnderecoModel();
         $endereco = new Endereco($enderecoModel);
@@ -147,6 +147,98 @@ class EnderecoTest extends TestCase
         $endereco->logradouro = 'teste';   
         $endereco->bairro = 'teste';   
         $endereco->cidade = 'teste';   
+
+        $this->expectException(CustomException::class);
+
+        $endereco->criar();        
+    }
+
+    public function testAtualizarPessoaIdVazio()
+    {
+        $enderecoModel = new EnderecoModel();
+        $endereco = new Endereco($enderecoModel);
+        
+        $endereco->id = 1;
+
+        $this->expectException(CustomException::class);
+
+        $endereco->atualizar();        
+    }
+
+    public function testAtualizarLogradrouroVazio()
+    {
+        $enderecoModel = new EnderecoModel();
+        $endereco = new Endereco($enderecoModel);
+        
+        $endereco->id = 1;
+        $endereco->pessoa_id = 1;        
+        $endereco->uf = 'DF';        
+
+        $this->expectException(CustomException::class);
+
+        $endereco->atualizar()();        
+    }
+
+    public function testAtualizarBairroVazio()
+    {
+        $enderecoModel = new EnderecoModel();
+        $endereco = new Endereco($enderecoModel);
+        
+        $endereco->id = 1;
+        $endereco->pessoa_id = 1;
+        $endereco->uf = 'DF';     
+        $endereco->logradouro = 'teste';   
+
+        $this->expectException(CustomException::class);
+
+        $endereco->atualizar()();        
+    }
+
+    public function testAtualizarCidadeVazio()
+    {
+        $enderecoModel = new EnderecoModel();
+        $endereco = new Endereco($enderecoModel);
+        
+        $endereco->id = 1;
+        $endereco->pessoa_id = 1;
+        $endereco->uf = 'DF';     
+        $endereco->logradouro = 'teste';   
+        $endereco->bairro = 'teste';   
+
+        $this->expectException(CustomException::class);
+
+        $endereco->atualizar();        
+    }
+
+    public function testAtualizarCepVazio()
+    {
+        $enderecoModel = new EnderecoModel();
+        $endereco = new Endereco($enderecoModel);
+        
+        $endereco->id = 1;
+        $endereco->pessoa_id = 1;
+        $endereco->uf = 'DF';     
+        $endereco->logradouro = 'teste';   
+        $endereco->bairro = 'teste';   
+        $endereco->cidade = 'teste';   
+
+        $this->expectException(CustomException::class);
+
+        $endereco->atualizar();        
+    }
+
+    public function testAtualizarUfVazia()
+    {
+        $enderecoModel = new EnderecoModel();
+        $endereco = new Endereco($enderecoModel);
+        
+        $endereco->id = 1;
+        $endereco->pessoa_id = 1;
+           
+        $endereco->logradouro = 'teste';   
+        $endereco->bairro = 'teste';   
+        $endereco->cidade = 'teste';  
+        $endereco->cep = '70660074';  
 
         $this->expectException(CustomException::class);
 

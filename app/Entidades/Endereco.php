@@ -109,6 +109,26 @@ class Endereco extends \stdClass
             throw new CustomException('Endereço não encontrado', 400);
         }
 
+        if (empty($this->pessoa_id)) {
+            throw new CustomException('O parâmetro "pessoa_id" é inválido', 400);
+        }
+
+        if (empty($this->logradouro)) {
+            throw new CustomException('O parâmetro "logradouro" não pode ser vazio', 400);
+        }
+
+        if (empty($this->bairro)) {
+            throw new CustomException('O parâmetro "bairro" não pode ser vazio', 400);
+        }
+
+        if (empty($this->cidade)) {
+            throw new CustomException('O parâmetro "cidade" não pode ser vazio', 400);
+        }
+
+        if (empty($this->cep)) {
+            throw new CustomException('O parâmetro "cep" não pode ser vazio', 400);
+        }
+
         $this->model->pessoa_id = $this->pessoa_id;
         $this->model->uf_id = $this->buscarUF($this->uf);
         $this->model->logradouro = $this->logradouro;
