@@ -76,4 +76,40 @@ class PessoaTest extends TestCase
 
         $pessoa->criar(0);
     }
+
+    /**
+     * Teste de CPF vazio
+     *
+     * @return void
+     */
+    public function testCPFVazio()
+    {
+        $pessoaModel = new PessoaModel();
+        $pessoa = new Pessoa($pessoaModel);
+
+        $pessoa->nome = 'teste';
+        $pessoa->cpf = '';
+
+        $this->expectException(CustomException::class);
+
+        $pessoa->criar(0);
+    }
+
+    /**
+     * Teste de nome vazio
+     *
+     * @return void
+     */
+    public function testCPFMenor()
+    {
+        $pessoaModel = new PessoaModel();
+        $pessoa = new Pessoa($pessoaModel);
+
+        $pessoa->nome = 'teste';
+        $pessoa->cpf = '1111111111';
+
+        $this->expectException(CustomException::class);
+
+        $pessoa->criar(0);
+    }
 }
