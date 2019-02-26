@@ -1,0 +1,439 @@
+{
+	"info": {
+		"_postman_id": "790ba3e0-ca4a-4d3f-bd3f-7ba2d3f8aac7",
+		"name": "Contatos",
+		"description": "Sistema para criação de Pessoas e Endereços. Conta apenas com duas entidades: Pessoa e Endereço. Correspondem aos resources /pessoa e /endereco respectivamente.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Pessoa",
+			"item": [
+				{
+					"name": "Listar Pessoas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/pessoa",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pessoa"
+							]
+						},
+						"description": "Lista todas as pessoas Cadastradas"
+					},
+					"response": []
+				},
+				{
+					"name": "Detalhar Pessoa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/pessoa/{{pessoa}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pessoa",
+								"{{pessoa}}"
+							]
+						},
+						"description": "Mostra os detalhes de uma pessoa cadastrada"
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Pessoa",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/pessoa?nome=simples&cpf=014.581.021-01&email=muito@simples.com&telefone=(61)981566145",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pessoa"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "simples",
+									"description": "Nome da Pessoa (Obrigatório)"
+								},
+								{
+									"key": "cpf",
+									"value": "014.581.021-01",
+									"description": "Nome do CPF (Obrigatório) 11 caracteres. Não valida a regra de formação do cpf para simplificar os testes.\n"
+								},
+								{
+									"key": "email",
+									"value": "muito@simples.com",
+									"description": "E-mail da Pessoa (Obrigatório). Não valida formatação."
+								},
+								{
+									"key": "telefone",
+									"value": "(61)981566145",
+									"description": "Telefone"
+								}
+							]
+						},
+						"description": "Cadastro de pessoas"
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Pessoa",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/pessoa/{{pessoa}}?nome=Tiago¹&cpf=01458102165&email=tiagogmfreire@gmail.com&telefone=981566145",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pessoa",
+								"{{pessoa}}"
+							],
+							"query": [
+								{
+									"key": "nome",
+									"value": "Tiago¹",
+									"description": "Nome da Pessoa (Obrigatório)"
+								},
+								{
+									"key": "cpf",
+									"value": "01458102165",
+									"description": "Nome do CPF (Obrigatório) 11 caracteres. Não valida a regra de formação do cpf para simplificar os testes.\n"
+								},
+								{
+									"key": "email",
+									"value": "tiagogmfreire@gmail.com",
+									"description": "E-mail da Pessoa (Obrigatório). Não valida formatação."
+								},
+								{
+									"key": "telefone",
+									"value": "981566145",
+									"description": "Telefone"
+								}
+							]
+						},
+						"description": "Cadastro de novas pessoas"
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Pessoa",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "44a85796-524d-47f3-8119-e624803e9e4b",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/pessoa/{{pessoa_excluir}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"pessoa",
+								"{{pessoa_excluir}}"
+							]
+						},
+						"description": "Remove o cadastro de uma pessoa pelo ID."
+					},
+					"response": []
+				}
+			],
+			"description": "Requisções para a entidade de Pessoa",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "77efc090-3d0b-4ff7-b699-ffa6e50d53b4",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8ca0195b-5b21-4a83-873d-aa3ef04bde50",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Endereço",
+			"item": [
+				{
+					"name": "Criar Endereço",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/endereco?pessoa_id=1&uf=DF&logradouro=AOS 04&bairro=Octogonal&cidade=Brasília&cep=70660074&complemento=rua",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"endereco"
+							],
+							"query": [
+								{
+									"key": "pessoa_id",
+									"value": "1",
+									"description": "ID da pessoa dona do endereço (Obrigatório)"
+								},
+								{
+									"key": "uf",
+									"value": "DF",
+									"description": "UF do endereço (Obrigatório)"
+								},
+								{
+									"key": "logradouro",
+									"value": "AOS 04",
+									"description": "Logradouro (Obrigatório)"
+								},
+								{
+									"key": "bairro",
+									"value": "Octogonal",
+									"description": "Bairro (Obrigatório)"
+								},
+								{
+									"key": "cidade",
+									"value": "Brasília",
+									"description": "Cidade (Obrigatório)"
+								},
+								{
+									"key": "cep",
+									"value": "70660074",
+									"description": "CEP (Obrigatório)"
+								},
+								{
+									"key": "complemento",
+									"value": "rua",
+									"description": "Complemento (Opcional)"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Endereços",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/endereco",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"endereco"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Detalhar Endereco",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/endereco/{{endereco}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"endereco",
+								"{{endereco}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Endereço",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/endereco/{{endereco_excluir}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"endereco",
+								"{{endereco_excluir}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Endereço",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{URL}}/endereco/{{endereco}}?pessoa_id=1&uf=DF&logradouro=AOS 07\"&bairro=Octogonal&cidade=Brasília&cep=70660074&complemento=rua",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"endereco",
+								"{{endereco}}"
+							],
+							"query": [
+								{
+									"key": "pessoa_id",
+									"value": "1",
+									"description": "ID da pessoa dona do endereço (Obrigatório)"
+								},
+								{
+									"key": "uf",
+									"value": "DF",
+									"description": "UF do endereço (Obrigatório)"
+								},
+								{
+									"key": "logradouro",
+									"value": "AOS 07\"",
+									"description": "Logradouro (Obrigatório)"
+								},
+								{
+									"key": "bairro",
+									"value": "Octogonal",
+									"description": "Bairro (Obrigatório)"
+								},
+								{
+									"key": "cidade",
+									"value": "Brasília",
+									"description": "Cidade (Obrigatório)"
+								},
+								{
+									"key": "cep",
+									"value": "70660074",
+									"description": "70660074"
+								},
+								{
+									"key": "complemento",
+									"value": "rua",
+									"description": "Complemento (Opcional)"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Requisições para a entidade de Endereço.",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d51cc2f5-bd90-49d2-94c0-9a745f0f3ec1",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "fb2bc627-4972-4fbe-9c66-9eede27027fc",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c8b2bf63-7970-462a-b975-a4d721d599f2",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "0797ddb2-a1e6-4238-a6a9-26990bd4204c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
